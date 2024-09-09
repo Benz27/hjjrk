@@ -1,0 +1,439 @@
+<?php
+
+session_start();    
+
+
+include("../php/conn.php");
+include("../php/about.php");
+include("../php/forms.php");   
+
+
+
+$vals_arr = array_values($_POST);
+$keys_arr = array_keys($_POST);
+$vals=json_encode($vals_arr);
+$keys=json_encode($keys_arr);
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>
+    Arrival Form
+  </title>
+  <!-- Favicon-->
+
+  <!-- Bootstrap icons-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="css/styles.css" rel="stylesheet" />
+</head>
+
+<body class="d-flex flex-column h-100">
+  <main class="flex-shrink-0 bg-image"style="background-image: url('../img/sch4.png'); height: 100vh;
+  background-repeat: no-repeat;background-size: cover;padding: 0;margin: 0;">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-success p-3 fixed-top">
+      <div class="container">
+        <a class="nav-link" href="../" style="font-family: Myriad;font-weight: bolder;color: black;font-size: 30px;">
+          <?php echo $abt_name;?>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+      </div>
+    </nav>
+    <!-- Header-->
+
+    <body>
+
+
+      <header class="py-5" style="margin-bottom: 16%;">
+        <div class="mt-5">
+          <main>
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-lg-12">
+                  <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-body">
+                      <!-- Start of card body -->
+                      <div class="row">
+                        <!-- Start of row -->
+                        <div class="d-flex flex-column flex-shrink-0 col-2 pt-2 pb-2 m-2 rounded-2" style="background-color: rgba(219,218,218,255);">                          <!-- Start of side navs -->
+
+                          <!-- Start of side navs -->
+                          <?php
+
+                          echo navs(2);
+
+                          ?>
+                          <!-- End of side navs -->
+                        </div>
+
+                        <div class="d-flex flex-column flex-shrink-0 col-9">
+                          <!-- Start of main -->
+                          <div class="card-header">
+                            <h3 class="text-start font-weight-light">Arrival</h3>
+                          </div>
+                          <div class="card-body">
+                            <form id="form" method="post" action="submitted.html">
+                              <div class="alert alert-danger" style="text-align:center" role="alert" id="alrt" hidden>
+
+                              </div>
+
+                            
+
+                              <textarea name="keys" id="keys" hidden><?php echo $keys;?></textarea>
+                              <textarea name="values" id="values" hidden><?php echo $vals;?></textarea>
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="form-floating mb-3 mb-md-0">
+                                    <input class="form-control" id="dept" type="text" name="dept"
+                                      placeholder=" " required />
+                                    <label for="inputFirstName">Department</label>
+                                    <small id="emp1" style="color: red;" hidden>This field cannot be empty!</small>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="row">
+                                    <div class="col-md-7">
+                                      <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control" id="dte" type="date" name="dte" placeholder=""
+                                           required />
+                                        <label for="inputDoB">Date</label>
+                                        <small id="emp2" style="color: red;" hidden>This field cannot be empty!</small>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                      <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control" id="tme" type="time" name="time" placeholder=""
+                                           required />
+                                        <label for="inputDoB">Time</label>
+                                        <small id="emp2" style="color: red;" hidden>This field cannot be empty!</small>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </div>
+                                <!-- <div class="col-md-5">
+
+
+                                  <div class="row">
+                                    <div class="col-md-4">
+                                      <div class="form-floating">
+                                        <input class="form-control" id="hrs" type="text" name="mname"
+                                          placeholder="Hours" onclick="passclick()" value="00" required />
+                                        <label for="inputLastName">Hours</label>
+                                        <small id="emp3" style="color: red;" hidden>This field cannot be empty!</small>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <div class="form-floating">
+                                        <input class="form-control" id="mnts" type="text" name="mname"
+                                          placeholder="Minutes" onclick="passclick()" value="00" required />
+                                        <label for="inputLastName">Minutes</label>
+                                        <small id="emp4" style="color: red;" hidden>This field cannot be empty!</small>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <div class="form-floating">
+                                        <select name="time" id="time" class="form-control" style="padding-top: 10%;">
+                                          <option value="am">AM</option>
+                                          <option value="pm">PM</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    
+                                  </div>
+                                  
+                                </div> -->
+                              </div>
+                              <div class="row mb-3">
+                                <div class="mb-3 mb-md-0">
+                                  <label for="reason" class="ms-2 mt-3 mb-2">What is the reason for the visit?</label>
+                                  <textarea class="form-control" id="reason" cols="110" rows="6"></textarea>
+                                  <small id="emp5" style="color: red;" hidden>This field cannot be empty!</small>
+                                </div>
+                              </div>
+                              <small id="emp3" style="color: red;" hidden>This field cannot be empty!</small>
+
+                              <div class="mt-5 mb-0">
+                                <!-- onclick="save()" -->
+                                <div class="d-grid"><button type="submit" 
+                                    class="btn btn-success btn-block">Submit</button></div>
+                              </div>
+                            </form>
+                          </div>
+                          </div>
+                          <!-- End of main -->
+                        </div>
+                        <!-- End of row -->
+                      </div>
+                      <!-- End of card body -->
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </main>
+
+        </div>
+      </header>
+      <!-- Features section-->
+      <!-- <section class="py-5" id="features">
+                <div class="container px-5 my-5">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">Shop noww</h2></div>
+                        <div class="col-lg-8">
+                            <div class="row gx-5 row-cols-1 row-cols-md-2">
+                                <div class="col mb-5 h-100">
+                                    <h2 class="h5">title</h2>
+                                    <p class="mb-0">some text. some text.some text.some text.some text.some text.some text.</p>
+                                </div>
+                                <div class="col mb-5 h-100">
+                                    <h2 class="h5">title</h2>
+                                    <p class="mb-0">some text. some text.some text.some text.some text.some text.some text.</p>
+                                </div>
+                                <div class="col mb-5 mb-md-0 h-100">
+                                    <h2 class="h5">title</h2>
+                                    <p class="mb-0">some text. some text.some text.some text.some text.some text.some text.</p>
+                                </div>
+                                <div class="col h-100">
+                                    <h2 class="h5">title</h2>
+                                    <p class="mb-0">some text. some text.some text.some text.some text.some text.some text.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section> -->
+    </body>
+  </main>
+  <!-- Footer-->
+  <!-- <footer class="bg-dark py-4 mt-auto">
+            <div class="container px-5">
+                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; <?php echo $abt_name;?> 2022</div></div>
+                    <div class="col-auto">
+
+                    </div>
+                </div>
+            </div>
+        </footer> -->
+  <style type="text/css">
+    @import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Poppins:ital,wght@0,400;0,500;0,600;1,600;1,800&display=swap');
+  </style>
+
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Core theme JS-->
+  <script>
+        var imgbase64 = "";
+        var fnm = "";
+
+        const elements = [
+            "dept",
+            "dte",
+            "reason"];
+        const emps_str=["emp1","emp2","emp3"];
+        const emps = [];
+        const obj_elements = [];
+        const elm_cnt = elements.length;
+        const emp_cnt = emps_str.length;
+
+        for (ob = 0; ob < elements.length; ob++) {
+            obj_elements.push(document.getElementById(elements[ob]));
+            emps.push(document.getElementById(emps_str[ob]));
+        }
+
+
+        const keys_raw=JSON.parse(document.getElementById("keys").value);
+        const keys=[];
+        for(x=0;x<keys_raw.length;x++){
+          keys.push(String(keys_raw[x]));
+        }
+
+        const vals=document.getElementById("values");
+        const ifile = document.getElementById("ifile");
+        const img = document.querySelector('#my_img');
+        const inp = document.querySelector('#pic');
+        var einterc = false;
+        var pinterc = false;
+
+
+        function alrt() {
+            document.getElementById("alrt").hidden = true;
+        }
+
+
+        function clear_mod(elm_arr,act) {
+            var indexes=[];
+            var arr_base=[];
+            var itr=0;
+            if(elm_arr!=null){
+                for(x=0;x<elm_arr.length;x++){
+                    if(isNaN(elm_arr[x])){
+                        indexes.push(Number(elements.indexOf(elm_arr[x])));
+                    }else{
+                        indexes.push(Number(elm_arr[x]));
+                    }
+                }
+            }else{
+                clear_all();
+                return;
+            }
+            
+            if(act){
+                itr=indexes.length;
+                arr_base=indexes;
+            }else{
+                itr=elm_cnt;
+                for(x=0;x<itr;x++){
+                    if(x!=indexes[x]){
+                        arr_base.push(x);
+                    }
+                }
+            }
+
+
+            for(x=0;x<itr;x++){
+                    obj_elements[arr_base[x]].setAttribute("style", "border-color:rgba(210,215,223,255);");
+                    // obj_elements[arr_base[x]].value="";
+                    emps[arr_base[x]].hidden = true;
+            }
+
+        }
+
+
+
+        function clear_all() {
+            for (x = 0; x < elm_cnt; x++) {
+                obj_elements[x].setAttribute("style", "border-color:rgba(210,215,223,255);");
+                // obj_elements[x].value="";
+                emps[x].hidden = true;
+            }
+        }
+
+        function set_err(elm_arr,act){
+            var bool=false;
+            var indexes=[];
+            var arr_base=[];
+            var itr=0;
+
+            if(elm_arr!=null){
+                for(x=0;x<elm_arr.length;x++){
+                    if(isNaN(elm_arr[x])){
+                        indexes.push(Number(elements.indexOf(elm_arr[x])));
+                    }else{
+                        indexes.push(Number(elm_arr[x]));
+                    }
+                }
+            }
+            
+            if(act){
+                itr=indexes.length;
+                arr_base=indexes;
+            }else{
+                itr=elm_cnt;
+                for(x=0;x<itr;x++){
+                    if(x!=indexes[x]){
+                        arr_base.push(x);
+                    }
+                }
+            }
+
+
+            for(x=0;x<itr;x++){
+                if(obj_elements[arr_base[x]].value == ""){
+                    obj_elements[arr_base[x]].setAttribute("style", "border-color:red;");
+                    emps[arr_base[x]].hidden = false;
+                    bool=true;
+                }
+            }
+            return bool;
+
+        }
+
+        function clear_val() {
+            for (x = 0; x < elm_cnt; x++) {
+
+                obj_elements[x].value="";
+                emps[x].hidden = true;
+            }
+        }
+
+        function dte_time(){
+
+        var dte_time = document.getElementById("dte").value+" "+document.getElementById("tme").value+":00";
+        return dte_time;
+        }
+
+        function save() {
+                alrt();
+                clear_mod();
+                if(set_err(["dept","dte","reason"],true)){
+                        return;
+                }
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+
+                    if (this.readyState == 4 && this.status == 200) {
+
+                        if (Number(this.responseText) == 1) {
+
+                          window.location.href = "submitted.html";
+                          return;
+                        } 
+                            console.log(this.responseText);
+                            document.getElementById("alrt").setAttribute("class", "alert alert-danger");
+                            document.getElementById("alrt").innerHTML = 'Something went wrong! <span aria-hidden="true" style="float: right;cursor: pointer;" onclick="alrt();">&times;</span>';
+                            document.getElementById("alrt").hidden = false;
+                        
+
+                    };
+
+                }
+                var formdata = new FormData();
+            const columns=[
+                ["dept","reason","dte"]
+            ];
+            const types=[                
+                ["string","string","date"]
+            ];
+            const values=[
+                [
+                    obj_elements[0].value, 
+                    obj_elements[2].value, 
+                    dte_time()
+                ]
+            ];
+            const tables=["arrivals"];
+
+
+
+            formdata.append("qts", keys);
+            formdata.append("ans", vals);
+            formdata.append("columns", JSON.stringify(columns));
+            formdata.append("types", JSON.stringify(types));
+            formdata.append("values", JSON.stringify(values));
+            formdata.append("tables", JSON.stringify(tables));
+
+                xhttp.open("POST", "../php/arrivals.php", true);
+                xhttp.send(formdata);
+
+            }
+        
+
+  </script>
+</body>
+
+</html>

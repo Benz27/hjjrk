@@ -1,0 +1,370 @@
+<?php
+session_start();
+
+include("./php/conn.php"); 
+include("./php/read.php");
+include("./php/forms.php");
+$user_data=check_login($alink);
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Form Editor</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper" class="pt-5">
+
+        <!-- Sidebar -->
+
+
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-success text-white topbar shadow fixed-top
+                    ">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <!-- <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button> -->
+
+                    <!-- Topbar Search -->
+                    <!-- <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form> -->
+                    <div class="sidebar-brand-text mx-3">Form Editor</div>
+                    <!-- Topbar Navbar -->
+
+
+
+                        <div class="mt-3 ml-auto alert alert-success text-center" role="alert" hidden id="alert">
+
+                        </div>
+                        
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+
+
+                        <!-- <div class="alert alert-success text-center" role="alert" id="alert">
+                            Saved Successfully
+                        </div> -->
+                        <!-- <li class="nav-item dropdown no-arrow mx-1">
+                            <a onclick="save_q_sheet()" class="nav-link dropdown-toggle" href="#" id="" role="button"
+                            >
+                                <span class="me-2 d-none d-lg-inline text-light small">
+                                    Save
+                                </span>
+                                <i class="fas fa-save fa-fw"></i>
+
+
+                            </a>
+
+
+                        </li> -->
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+
+                        <li class="nav-item dropdown no-arrow">
+                            <a onclick="save_q_sheet()" class="nav-link dropdown-toggle" href="#" id="" role="button"
+                               >
+
+                                <span class="mr-2 d-none d-lg-inline text-light small">
+                                    Save
+                                </span>
+                                <i class="fas fa-save fa-fw text-light fa-sm fa-fw mr-2"></i>
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="health_status_form.html" id="">
+                                <span class="mr-2 d-none d-lg-inline text-light small">
+                                    Go back
+                                </span>
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-light"></i>
+                            </a>
+                        </li>
+
+
+
+
+                    </ul>
+
+                </nav>
+
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+
+
+                    <!-- Start -->
+
+                    <div class="container-xl px-4 mt-5 mb-4 py-4 card shadow">
+                        <div class="row">
+
+                            <div class="col-xl-12">
+                                <!-- Account details card-->
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <button class="form-control border-0" data-toggle="modal"
+                                                    data-target="#modal_gp" onclick="modal_gp(0)">Add <i
+                                                        class="fas fa-fw fa-plus"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body" id="primary">
+                                        <!-- start of card-body content-->
+
+                                        <!-- end of card-body content-->
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+                        </div>
+
+                        <div id="row">
+                            <div class="col-xl-12">
+
+                                <div class="card mb-4">
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <!-- End -->
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <?php echo $abt_admin_footer;?>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+
+    <!-- <div class="modal fade" id="modal_save" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" id="del_label"></h5>
+
+          <span aria-hidden="true" data-dismiss="modal" style="cursor: pointer;">&times;</span>
+
+        </div>
+        <div id="ld">
+          <div class="modal-body">
+            <p id="del_p"></p>
+          </div>
+          <div class="modal-footer" id="mdfooter">
+            <button type="button" class="btn btn-danger" id="del_btn">Delete</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+
+    <div class="modal fade" id="modal_del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="del_label"></h5>
+
+                    <span aria-hidden="true" data-dismiss="modal" style="cursor: pointer;">&times;</span>
+
+                </div>
+                <div id="ld">
+                    <div class="modal-body">
+                        <p id="del_p"></p>
+                    </div>
+                    <div class="modal-footer" id="mdfooter">
+                        <button type="button" class="btn btn-danger" id="del_btn">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="./php/logout.php">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal_gp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="gp_label">Add Group</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label" id="">Group Name:</label>
+                        <input type="text" class="form-control" id="gp_name">
+                        <small id="emp1" style="color: red;" hidden>This field cannot
+                            be empty!</small>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="gp_save">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="modal fade" id="modal_qs" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="qs_label">Modify Item</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label" id="">Question/Title:</label>
+                        <input type="text" class="form-control" id="qs_title">
+                        <small id="emp2" style="color: red;" hidden>This field cannot
+                            be empty!</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label" id="">Type:</label>
+                        <select class="form-control" id="qs_opt">
+                            <option value="radio">Options/Radio buttons</option>
+                            <option value="cbox">Multiple Choices/Checkboxes</option>
+                            <option value="text">Text</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label" id="cc">Choices:</label>
+                        <textarea class="form-control" id="qs_cc" cols="30" rows="10"></textarea>
+                        <small id="emp3" style="color: red;" hidden>This field cannot
+                            be empty!</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label" id="">Required:</label>
+                        <input type="checkbox" class="" id="qs_req">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="" id="qs_save">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../js/sb-admin-2.min.js"></script>
+
+    <script src="js/hst_form.js"></script>
+
+
+</body>
+
+</html>

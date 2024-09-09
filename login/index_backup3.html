@@ -1,0 +1,128 @@
+<?php
+
+session_start();    
+
+
+include("../php/conn.php");
+include("../php/login.php");   
+include("../php/about.php");
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Login</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary bg-image"  style="background-image: url('../img/sch4.png'); height: 100vh;
+background-repeat: no-repeat;background-size: cover;padding: 0;margin: 0;  background-attachment: fixed;">
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Log-In</h1>
+                                    </div>
+                                    <form class="user" id="form" method="post">
+                                        <div class="alert alert-danger" style="text-align:center" role="alert" id="alertp" hidden>
+                                                
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control form-control-user"
+                                            id="email" type="email" name="email" aria-describedby="emailHelp"
+                                                placeholder="Enter Email Address...">
+                                        </div>
+                                        <div class="form-floating mb-3 mt-2">
+
+                                            <div class="mb-3">
+                                                <div class="input-group">
+
+                                                    <input class="form-control form-control-user" id="pass" type="password" placeholder="Type your password" name="pass" required/>
+
+                                                    <span class="input-group-append">
+                                                        <button class="btn ms-n4" type="button"
+                                                            onclick="toggle_pass(`tpass`,`pass`)">
+                                                            <i id="tpass" class="bi-eye-fill"></i>
+                                                        </button>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <button class="btn btn-success btn-user btn-block" type="submit">
+                                            Login
+                                        </button>
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="../forgot_pass/">Forgot Password?</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="../signup/options.html">Register an Account!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../js/sb-admin-2.min.js"></script>
+    <script>
+        function toggle_pass(id,id2) {
+            var x = document.getElementById(id2);
+            if (x.type === "password") {
+              x.type = "text";
+              document.getElementById(id).setAttribute("class","bi-eye-slash-fill");
+            } else {
+              x.type = "password";
+              document.getElementById(id).setAttribute("class","bi-eye-fill");
+            }
+          }
+          
+    </script>
+</body>
+
+</html>

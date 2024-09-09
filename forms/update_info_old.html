@@ -1,0 +1,596 @@
+<?php
+session_start();
+
+include("../php/conn.php");
+include("../php/read.php");
+include("../php/user.php");
+include("../php/about.php");
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>
+        Update Info
+    </title>
+    <!-- Favicon-->
+
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+        .input-icons i {
+            position: absolute;
+        }
+
+        .input-icons {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .icon {
+            padding: 10px;
+            min-width: 40px;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column h-100 bg-image"  style="background-image: url('../img/sch4.png'); height: 100vh;
+background-repeat: no-repeat;background-size: cover;padding: 0;margin: 0;  background-attachment: fixed;">
+    <main class="flex-shrink-0">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-success p-3 fixed-top">
+            <div class="container">
+                <a class="nav-link" href="../"
+                    style="font-family: Myriad;font-weight: bolder;color: black;font-size: 30px;">
+                    <?php echo $abt_name;?>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            </div>
+        </nav>
+        <!-- Header-->
+      <!-- style="margin-bottom: 16%;" -->
+      <header class="py-5">
+            <div class="mt-5">
+                <main>
+                    <div class="container mb-5">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-7">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    
+                                    <div class="card-header">
+                                        <h3 class="font-weight-light mt-4" id="primarylabel">Update Information</h3>
+                                        <p class="font-weight-light"><span id="secondlabel">Fill out the fields below.
+                                            
+                                    </div>
+                                    <nav class="nav justify-content-center">
+                                        <a class="nav-link active" href="./update_info.html">User Information</a>
+                                        <a class="nav-link text-dark" href="./update_pfp.html">Profile Picture</a>
+                                    </nav>
+                                    <div class="card-body" id="cbody">
+                                        <form id="form" method="post">
+                                            <?php
+                                            echo '
+                                            <input type="text" name="pic" id="pic" value="" hidden> 
+                                            <input type="file" id="ifile" name="fileUpload" hidden>
+
+                                            <div class="mb-3">
+                                                <label class="small mb-1" for="inputEmailAddress">'.$id_type.'</label>
+                                                <input onchange="getuserid()" class="form-control" id="user_id" type="text" value="'.$user_id.'"/>
+                                                <small id="emp0" style="color: red;" hidden>This field cannot be empty!</small>
+                                            </div>
+
+                                            <hr>
+                                            <!-- Form Row-->
+                                            <div class="row gx-3 mb-3">
+                                   
+                                                <div class="col-md-4">
+                                                    <label class="small mb-1" for="fname">First name</label>
+                                                    <input class="form-control" id="fname" type="text" placeholder="Enter your first name" value="'.$fname.'" name="fname" required/>
+                                                    <small id="emp1" style="color: red;" hidden>This field cannot be empty!</small>
+                                                </div>
+                                    
+                                                <div class="col-md-4">
+                                                    <label class="small mb-1" for="lname">Last name</label>
+                                                    <input class="form-control" id="lname" type="text" placeholder="Enter your last name" value="'.$lname.'" name="lname" required/>
+                                                    <small id="emp2" style="color: red;" hidden>This field cannot be empty!</small>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="small mb-1" for="mname">Middle name</label>
+                                                    <input class="form-control" id="mname" type="text" placeholder="Enter your middle name" value="'.$mname.'" name="mname" required/>
+                                                    <small id="emp7" style="color: red;" hidden>This field cannot be empty!</small>
+                                                </div>
+                                            </div>
+                            
+                                            <div class="row gx-3 mb-3">
+                                                <!-- Form Group (phone number)-->
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="inputPhone">Address (Street/Block, City, Province)</label>
+                                                    <input class="form-control" id="addr" type="" placeholder="Enter your phone number" value="'.$addr.'" onchange="" name="addr" required/>
+                                                    <small id="emp8" style="color: red;" hidden>This field cannot be empty!</small>
+                                                </div>
+                                                <!-- Form Group (birthday)-->
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                                                    <input class="form-control" id="email" type="email" placeholder="Enter your email address" value="'.$email.'" onchange="getuser()" name="email" required/>
+                                                    <small id="emp3" style="color: red;" hidden>This field cannot be empty!</small>
+                                                </div>
+                                            </div>
+
+                                            
+                                            <!-- <div class="mb-3">
+
+                                            </div> -->
+                                            <!-- Form Row-->
+                                            <div class="row gx-3 mb-3">
+                                                <!-- Form Group (phone number)-->
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="inputPhone">Phone number</label>
+                                                    <input class="form-control" id="contno" type="tel" placeholder="Enter your phone number" value="'.$contno.'" onchange="getphone()" name="contno" required/>
+                                                    <small id="emp4" style="color: red;" hidden>This field cannot be empty!</small>
+                                                </div>
+                                                <!-- Form Group (birthday)-->
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="inputBirthday">Birthday</label>
+                                                    <input class="form-control" id="dte" type="date" placeholder="Enter your birthday" value="'.$bday.'" name="dte" required/>
+                                                    <small id="emp5" style="color: red;" hidden>This field cannot be empty!</small>
+                                                </div>
+                                            </div>
+
+                                            <!-- <div class="mb-3">
+                                                <label class="small mb-1" for="inputPassword">Password</label>
+                                                <input class="form-control" id="pass" type="password" placeholder="Enter your password to continue changes" value="" name="pass" required/>
+                                                <small id="emp6" style="color: red;" hidden>This field cannot be empty!</small>
+                                            </div> -->
+                                            <div class="input-group" hidden>
+                                                <input class="form-control" id="pass" type="password" name="pass" placeholder="Enter your password to continue changes" value="" required>
+                                    
+                                                <span class="input-group-append">
+                                                    <button class="btn ms-n4" type="button" onclick="toggle_pass(`tpass`,`pass`)">
+                                                        <i id="tpass" class="bi-eye-fill"></i>
+                                                    </button>
+                                                </span>
+                                         </div>
+                                         <small id="emp6" style="color: red;" hidden>This field cannot be empty!</small>
+
+
+                                            <div class="alert alert-success text-center" role="alert" hidden id="alrtd">
+                                               
+                                            </div>
+                                            <button class="btn btn-success mt-3" type="button" onclick="save('.$user_id.');">Update</button>';?>
+
+                                            <a class="btn btn-secondary mt-3" href="manage_account.html" type="button">Back</a>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-5 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="../images/icon.png" alt="..." /></div> -->
+
+                        </div>
+                    </div>
+                </main>
+
+            </div>
+        </header>
+    </main>
+    <!-- Footer-->
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Poppins:ital,wght@0,400;0,500;0,600;1,600;1,800&display=swap');
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery-3.6.0.js"></script>
+    <!-- <script src="scripts.js"></script> -->
+    <script>
+
+        var imgbase64 = "";
+        var fnm = "";
+        var con_pass = false;
+        const elements = [
+            "user_id",
+            "fname",
+            "lname",
+            "mname",
+            "addr",
+            "email",
+            "contno",
+            "dte",
+            "pass"];
+        const emps_str = ["emp0","emp1", "emp2", "emp7", "emp8", "emp3", "emp4", "emp5", "emp6"];
+        const emps = [];
+        const obj_elements = [];
+        const elm_cnt = elements.length;
+        const emp_cnt = emps_str.length;
+
+        for (ob = 0; ob < elements.length; ob++) {
+            obj_elements.push(document.getElementById(elements[ob]));
+            emps.push(document.getElementById(emps_str[ob]));
+        }
+
+        const ifile = document.getElementById("ifile");
+        const img = document.querySelector('#my_img');
+        const inp = document.querySelector('#pic');
+
+        var e = document.getElementById("email");
+        var cn = document.getElementById("contno");
+
+        var dte = document.getElementById("dte");
+        var pass = document.getElementById("pass");
+
+        var einterc = false;
+        var pinterc = false;
+        var iinterc = false
+
+        function toggle_pass(id, id2) {
+            var x = document.getElementById(id2);
+            if (x.type === "password") {
+                x.type = "text";
+                document.getElementById(id).setAttribute("class", "bi-eye-slash-fill");
+            } else {
+                x.type = "password";
+                document.getElementById(id).setAttribute("class", "bi-eye-fill");
+            }
+        }
+        function clear_mod(elm_arr, act) {
+            var indexes = [];
+            var arr_base = [];
+            var itr = 0;
+            if (elm_arr != null) {
+                for (x = 0; x < elm_arr.length; x++) {
+                    if (isNaN(elm_arr[x])) {
+                        indexes.push(Number(elements.indexOf(elm_arr[x])));
+                    } else {
+                        indexes.push(Number(elm_arr[x]));
+                    }
+                }
+            } else {
+                clear_all();
+                return;
+            }
+
+            if (act) {
+                itr = indexes.length;
+                arr_base = indexes;
+            } else {
+                itr = elm_cnt;
+                for (x = 0; x < itr; x++) {
+                    if (x != indexes[x]) {
+                        arr_base.push(x);
+                    }
+                }
+            }
+
+
+            for (x = 0; x < itr; x++) {
+                obj_elements[arr_base[x]].setAttribute("style", "border-color:rgba(210,215,223,255);");
+                // obj_elements[arr_base[x]].value="";
+                emps[arr_base[x]].hidden = true;
+            }
+
+        }
+
+
+
+        function clear_all() {
+
+            for (x = 0; x < elm_cnt; x++) {
+                obj_elements[x].setAttribute("style", "border-color:rgba(210,215,223,255);");
+                // obj_elements[x].value="";
+                emps[x].hidden = true;
+            }
+        }
+
+
+
+        function alertdclose() {
+            document.getElementById("alrtd").hidden = true;
+        }
+
+        function set_err(elm_arr, act) {
+            var bool = false;
+            var indexes = [];
+            var arr_base = [];
+            var itr = 0;
+
+            if (elm_arr != null) {
+                for (x = 0; x < elm_arr.length; x++) {
+                    if (isNaN(elm_arr[x])) {
+                        indexes.push(Number(elements.indexOf(elm_arr[x])));
+                    } else {
+                        indexes.push(Number(elm_arr[x]));
+                    }
+                }
+            }
+
+            if (act) {
+                itr = indexes.length;
+                arr_base = indexes;
+            } else {
+                itr = elm_cnt;
+                for (x = 0; x < itr; x++) {
+                    if (x != indexes[x]) {
+                        arr_base.push(x);
+                    }
+                }
+            }
+
+
+            for (x = 0; x < itr; x++) {
+                if (obj_elements[arr_base[x]].value == "") {
+                    obj_elements[arr_base[x]].setAttribute("style", "border-color:red;");
+                    emps[arr_base[x]].hidden = false;
+                    bool = true;
+                }
+            }
+            return bool;
+
+        }
+
+
+        function save(id) {
+            if (!einterc && !pinterc && !iinterc) {
+
+
+                clear_mod();
+                alertdclose();
+
+                if (set_err(["user_id","fname", "lname", "email", "contno", "dte", "addr"], true)) {
+                    return;
+                }
+                submit();
+                //var xmlhttp = new XMLHttpRequest();
+                // xmlhttp.onreadystatechange = function () {
+                //     if (this.readyState == 4 && this.status == 200) {
+                //         var z = Number(this.responseText);
+                //         if (z == 1) {
+                            
+                //         } else {
+                //             document.getElementById("alrtd").setAttribute("class", "alert alert-warning");
+                //             document.getElementById("alrtd").innerHTML = 'Wrong password! <span aria-hidden="true" style="float: right;cursor: pointer;" onclick="alertdclose();">&times;</span>';
+                //             document.getElementById("alrtd").hidden = false;
+                //             document.getElementById("pass").value = "";
+                //         }
+                //     }
+                // }
+                // xmlhttp.open("GET", "../php/check_pass.php?pass=" + document.getElementById("pass").value, true);
+                // xmlhttp.send();
+            }
+        }
+
+        function submit() {
+
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+
+                if (this.readyState == 4 && this.status == 200) {
+
+                    clear_mod();
+                    document.getElementById("pass").value = "";
+                    if (Number(this.responseText) == 1) {
+                        document.getElementById("alrtd").setAttribute("class", "alert alert-success");
+                        document.getElementById("alrtd").innerHTML = 'Update success! <span aria-hidden="true" style="float: right;cursor: pointer;" onclick="alertdclose();">&times;</span>';
+                        document.getElementById("alrtd").hidden = false;
+                        return;
+                    }
+                    console.log(this.responseText);
+                    document.getElementById("alrtd").setAttribute("class", "alert alert-danger");
+                    document.getElementById("alrtd").innerHTML = 'Something went wrong! <span aria-hidden="true" style="float: right;cursor: pointer;" onclick="alertdclose();">&times;</span>';
+                    document.getElementById("alrtd").hidden = false;
+                };
+
+            }
+            var formdata = new FormData();
+            const columns = ["user_id","fname", "lname", "mname", "address", "email", "phone", "bday"];
+            const types = ["int","string", "string", "string", "string", "string", "string", "date"];
+            const values = [obj_elements[0].value,
+            obj_elements[1].value,
+            obj_elements[2].value,
+            obj_elements[3].value,
+            obj_elements[4].value,
+            obj_elements[5].value,
+            obj_elements[6].value,
+            obj_elements[7].value];
+            const tables = ["user", "info"];
+
+            formdata.append("columns", JSON.stringify(columns));
+            formdata.append("types", JSON.stringify(types));
+            formdata.append("values", JSON.stringify(values));
+            formdata.append("tables", JSON.stringify(tables));
+
+
+
+            xhttp.open("POST", "../php/edt_acc.php?fun=updt", true);
+            xhttp.send(formdata);
+        }
+
+
+        function getuser() {
+            var str = e.value;
+            var que = "email";
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var z = this.responseText;
+
+                    var x;
+                    var y = 0;
+                    y = Number(z);
+                    console.log(y);
+                    if (y == 1) {
+                        einterc = true;
+                    } else if (y == 0) {
+                        einterc = false;
+                    }
+
+
+                    if (y == 1) {
+                        x = e.value;
+                        e.style.border = "2px solid red";
+                        document.getElementById("emp3").hidden = false;
+                        document.getElementById("emp3").innerHTML = "Email was already taken!";
+                        // document.getElementById("alertp").innerHTML="Email was already taken!";
+                        // document.getElementById("alertp").hidden=false;
+                    } else {
+                        x = e.value;
+                        e.style.border = "1px solid #ced4da";
+                        document.getElementById("emp3").hidden = true;
+                        document.getElementById("emp3").innerHTML = "This field cannot be empty!";
+                        // document.getElementById("alertp").hidden=true;
+                        // document.getElementById("alertp").innerHTML="";
+                    }
+
+                }
+            }
+
+            xmlhttp.open("GET", "../php/checkuser.php?table=user&q=" + str + "&qu=" + que, true);
+            xmlhttp.send();
+        }
+
+        function getphone() {
+            var str = cn.value;
+            var que = "phone";
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    var z = this.responseText;
+                    var x;
+                    var y = 0;
+                    y = Number(z);
+
+                    if (y == 1) {
+                        pinterc = true;
+                    } else if (y == 0) {
+                        pinterc = false;
+                    }
+
+
+                    if (y == 1) {
+                        x = cn.value;
+                        cn.style.border = "2px solid red";
+                        document.getElementById("emp4").hidden = false;
+                        document.getElementById("emp4").innerHTML = "Phone was already taken!";
+                        // document.getElementById("alertp2").innerHTML="Phone was already taken!";
+                        // document.getElementById("alertp2").hidden=false;
+
+                    } else {
+                        x = cn.value;
+                        cn.style.border = "1px solid #ced4da";
+                        document.getElementById("emp4").hidden = true;
+                        document.getElementById("emp4").innerHTML = "This field cannot be empty!";
+                        // document.getElementById("alertp2").hidden=true;
+                        // document.getElementById("alertp2").innerHTML="";
+                    }
+
+
+                }
+            }
+
+            xmlhttp.open("GET", "../php/checkuser.php?table=info&q=" + str + "&qu=" + que, true);
+            xmlhttp.send();
+        }
+
+
+
+        function getuserid() {
+            user_id_inp=document.getElementById("user_id");
+            var str = user_id_inp.value;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var z = this.responseText;
+                    var x;
+                    var y = false;
+                    y = Boolean(z);
+                    console.log(y);
+                    if (y) {
+                        iinterc = true;
+                    } else {
+                        iinterc = false;
+                    }
+                    if (y) {
+                        user_id_inp.style.border = "2px solid red";
+                        document.getElementById("emp0").hidden = false;
+                        document.getElementById("emp0").innerHTML = "This ID was already registered!";
+                    } else {
+                        user_id_inp.style.border = "1px solid #ced4da";
+                        document.getElementById("emp0").hidden = true;
+                        document.getElementById("emp0").innerHTML = "This field cannot be empty!";
+                    }
+                }
+            }
+        
+            xmlhttp.open("GET", "../php/check_id.php?id=" + str, true);
+            xmlhttp.send();
+        }
+
+
+
+        function checkpass() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var z = Number(this.responseText);
+
+                    if (z == 1) {
+                        ret_cpass(true);
+                        return;
+                    }
+
+                    ret_cpass(false);
+                }
+            }
+            xmlhttp.open("GET", "../php/check_pass.php?pass=" + document.getElementById("pass").value, true);
+            xmlhttp.send();
+
+        }
+        function ret_cpass(bool) {
+            con_pass = bool;
+        }
+
+        ifile.addEventListener('change', function (event) {
+
+            const uploadedFile = document.querySelector('#ifile').files[0];
+            toBase64(uploadedFile)
+                .then(res => {
+                    imgbase64 = res;
+                    inp.value = imgbase64;
+                })
+                .catch(err => {
+                    imgbase64 = err;
+                    console.log(err);
+                })
+
+        });
+
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.addEventListener('load', function () {
+
+                img.setAttribute('src', reader.result);
+                fnm = ifile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+
+            });
+
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+
+    </script>
+</body>
+
+</html>

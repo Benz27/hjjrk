@@ -1,0 +1,795 @@
+<?php
+session_start();
+
+include("./php/conn.php"); 
+include("./php/read.php");
+include("./php/forms.php");
+$user_data=check_login($alink);
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Announcements</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <style>
+       
+            .anc-text {
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                display: -webkit-box !important;
+                -webkit-line-clamp: 4 !important; /* number of lines to show */
+                        line-clamp: 4 !important; 
+                -webkit-box-orient: vertical !important;
+             }
+       .no-bg {
+            background-color: transparent !important;
+        }
+
+        .selected {
+            color: white;
+            background: #007bff;
+        }
+
+        div.scroll-modal {
+            width: 100%;
+            max-height: 700px;
+            overflow-y: auto;
+            text-align: justify;
+            overflow-x: hidden;
+        }
+
+        .ime-cont {
+            width: 230px;
+            height: 350px;
+            padding: 10px;
+            margin: 10px;
+
+        }
+
+        .ime-img {
+            width: 230px;
+            height: 350px;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body id="page-top bg-gradient-success bg-image" style="background-image: url('../img/sch4.png'); height: 100vh;
+background-repeat: no-repeat;background-size: cover;padding: 0;margin: 0;  background-attachment: fixed;">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #198754;">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <div class="sidebar-brand-text mx-1">Admin</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li> -->
+
+            <!-- Divider -->
+            <!-- <hr class="sidebar-divider"> -->
+
+            <!-- Heading -->
+            <!-- <div class="sidebar-heading">
+                Interface
+            </div> -->
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Components</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
+                    </div>
+                </div>
+            </li> -->
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <!-- <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Utilities</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Utilities:</h6>
+                        <a class="collapse-item" href="utilities-color.html">Colors</a>
+                        <a class="collapse-item" href="utilities-border.html">Borders</a>
+                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                    </div>
+                </div>
+            </li> -->
+
+            <!-- Divider -->
+            <!-- <hr class="sidebar-divider"> -->
+
+            <!-- Heading -->
+            <!-- <div class="sidebar-heading">
+                Addons
+            </div> -->
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+                    aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Pages</span>
+                </a>
+                <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="login.html">Login</a>
+                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Other Pages:</h6>
+                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item active text-success" href="blank.html">Blank Page</a>
+                    </div>
+                </div>
+            </li> -->
+
+            <!-- Nav Item - Charts -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Charts</span></a>
+            </li> -->
+
+            <!-- Nav Item - Tables -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span></a>
+            </li> -->
+            <div id="sidenav"></div>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column no-bg">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa text-success fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <!-- <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form> -->
+
+                    <!-- Topbar Navbar -->
+                    <?php include("../php/about.php"); echo $admin_header_name;?>
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <!-- <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li> -->
+
+                        <!-- Nav Item - Alerts -->
+                        <!-- <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Alerts Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 12, 2019</div>
+                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 7, 2019</div>
+                                        $290.29 has been deposited into your account!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 2, 2019</div>
+                                        Spending Alert: We've noticed unusually high spending for your account.
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li> -->
+
+                        <!-- Nav Item - Messages -->
+                        <!-- <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">
+                                    Message Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                            problem I've been having.</div>
+                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                            alt="...">
+                                        <div class="status-indicator"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">I have the photos that you ordered last month, how
+                                            would you like them sent to you?</div>
+                                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-warning"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Last month's report looks great, I am very happy with
+                                            the progress so far, keep up the good work!</div>
+                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                            told me that people say this to all dogs, even if they aren't good...</div>
+                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                            </div>
+                        </li> -->
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                    <?php echo $nav_fname;?>
+                                    <?php echo $nav_lname;?>
+                                </span>
+                                <img class="img-profile rounded-circle" src="<?php echo $nav_pfp;?>">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <!-- <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a> -->
+                                <!-- <div class="dropdown-divider"></div> -->
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Announcements</h6>
+                        </div>
+                        <div class="card-header text-end p-3">
+                            <div class="row">
+                                <div class="col-2">
+                                    <button data-toggle="modal" data-target="#modal_anc" class="me-3 border border-0"
+                                        role="button" onclick="clear_all()"
+                                        style="text-decoration: none;color:black;float:left;"><i
+                                            class="fas fa-fw fa-edit"></i> Add</button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-body row" id="main_body">
+                           
+                            <!-- <div class="card shadow my-3">
+                                <div class="card-header py-3">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <h6 class="m-0 form-control border-0 outline-0 font-weight-bold text-primary">Announcements</h6>
+
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="form-control border-0"
+                                                data-toggle="modal" data-target="#modal_gp" onclick="modal_gp(` + id + `)">Edit <i
+                                                    class="fas fa-fw fa-edit"></i></button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="card-body">
+
+                                    <div class="p-3 mb-3">
+                                        <span style="white-space: pre-line" id="anc_content">
+
+                                        </span>
+                                    </div>
+                                    <div class="row mb-3 d-flex justify-content-center" id="img">
+
+                                    </div>
+                                </div>
+                            </div> -->
+                  
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <?php echo $abt_admin_footer;?>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <div class="modal fade" id="modal_del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="del_label">Delete Post</h5>
+
+                    <span aria-hidden="true" data-dismiss="modal" style="cursor: pointer;">&times;</span>
+
+                </div>
+                <div id="ld">
+                    <div class="modal-body">
+                        <p id="del_p">This action cannot be undone.</p>
+                    </div>
+                    <div class="modal-footer" id="mdfooter">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="del_anc();" id="del_btn">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="./php/logout.php">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true" id="modal_anc">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="card-header">
+                    <h5 class="modal-title" id="mod_title">New Post</h5>
+                </div>
+                <div class="card-body scroll-modal">
+
+
+                    <textarea class="form-control" name="" cols="100" rows="10" id="modal_content"
+                        placeholder="Your post content here."></textarea>
+
+                    <br>
+                    <div id="" class="col-md-12 my-2"
+                        style="padding: 10px; margin-bottom: 1%; background-image: linear-gradient(to bottom, rgb(199, 199, 199), rgb(199, 199, 199) 100%);">
+
+                        <div style="margin-top: 10px;" class="d-flex justify-content-center">
+                            <button id="btn_rem" onclick="clear_pic();" style="margin-right: 1%;" type="button"
+                                class="btn-dark">Remove</button>
+                            <button id="" onclick="ifile.click();" type="button" class="btn-dark">Browse
+                                File</button>
+                            <input type="file" id="ifile" name="fileUpload" hidden>
+                        </div>
+                        <div class="d-flex justify-content-center my-3">
+                            <img id="modal_img" class="shadow img-fluid" src="" alt="">
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <div class="alert alert-danger" style="text-align:center" role="alert" id="alrtd" hidden>
+                    </div>
+                    <button class="btn btn-primary" id="btn_save" onclick="save_anc()">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+
+
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
+    <script src="./js/sidenav_admin.js"></script>
+    <script>
+
+        document.getElementById("sidenav").innerHTML = navs_adm("Announcements");
+
+        var content = "";
+        var img = "";
+        var base64 = "";
+        var file_name = "";
+        const modal_img = document.getElementById("modal_img");
+        const modal_content = document.getElementById("modal_content");
+        const btn_save = document.getElementById("btn_save");
+        const btn_rem = document.getElementById("btn_rem");
+        const main_body = document.getElementById("main_body");
+        const mod_title = document.getElementById("mod_title");
+        var current_anc_id = false;
+        get_ans();
+        function get_ans() {
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    // const obj = JSON.parse(this.responseText);
+                    // content = obj[1];
+                    // document.getElementById("anc_content").innerHTML = content;
+                    // if (obj[0] != "") {
+                    //     img = obj[0];
+                    //     base64 = img;
+                    //     document.getElementById("img").innerHTML =
+                    //         `<img style="max-width:560px;max-height:560px;" src="../img/anc/` + img + `" />`;
+                    //     return;
+                    // }
+                    // img = '';
+                    // base64 = img;
+                    // document.getElementById("img").innerHTML = '';
+                    //console.log(this.responseText);
+                    main_body.innerHTML = this.responseText;
+
+                }
+            }
+            xmlhttp.open("GET", "./php/ht_anc_editor.php?fun=get_anc", false);
+            xmlhttp.send();
+        }
+        function load_mod() {
+            alertdclose();
+            modal_content.value = content;
+            modal_img.setAttribute("src", "../img/anc/" + img);
+            base64 = "";
+            btn_bool();
+        }
+        function clear_all() {
+            mod_title.innerHTML = "New Post";
+            current_anc_id = false;
+            base64 = "";
+            file_name = "";
+            modal_content.value = "";
+            modal_img.setAttribute("src", "");
+            btn_bool(true);
+        }
+
+        function clear_pic() {
+            base64 = "";
+            file_name = "";
+            modal_img.setAttribute("src", "");
+            btn_bool(true);
+        }
+        function edit_anc(anc_id) {
+            alertdclose();
+            mod_title.innerHTML = "Edit Post";
+            current_anc_id = anc_id;
+            modal_content.value = document.getElementById("anc_content_txt-" + anc_id).value;
+            if (document.getElementById("img-" + anc_id)) {
+                modal_img.setAttribute("src", document.getElementById("img-" + anc_id).src);
+                file_name = document.getElementById("img-" + anc_id).src.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+            }
+            base64 = "";
+            btn_bool();
+        }
+        function btn_bool(clear) {
+            var bool = true;
+            if (img != "") {
+                bool = false;
+            }
+
+            if (clear) {
+                bool = true;
+            }
+            if (base64 != "") {
+                bool = false;
+            }
+            if (file_name != "") {
+                bool = false;
+            }
+            btn_rem.disabled = bool;
+        }
+        const ifile = document.getElementById("ifile");
+        ifile.addEventListener('change', function (event) {
+
+            const uploadedFile = document.querySelector('#ifile').files[0];
+            toBase64(uploadedFile)
+                .then(res => {
+                    base64 = res;
+                    btn_bool();
+                })
+                .catch(err => {
+                    base64 = "";
+                    btn_bool();
+                    console.log(err);
+                })
+
+        });
+
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.addEventListener('load', function () {
+
+                modal_img.setAttribute('src', reader.result);
+                file_name = ifile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+
+            });
+
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+
+        function alertdclose() {
+            document.getElementById("alrtd").hidden = true;
+        }
+
+
+
+        function save_anc() {
+
+            alertdclose();
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                    const obj=JSON.parse(this.responseText);
+                    if (!isNaN(obj[0])) {
+
+                        //document.getElementById("alrtd").setAttribute("class", "alert alert-success");
+                        //document.getElementById("alrtd").innerHTML = 'Success! <span aria-hidden="true" style="float: right;cursor: pointer;" onclick="alertdclose();">&times;</span>';
+                        //document.getElementById("alrtd").hidden = false;
+                        file_name = "";
+                        base64 = "";
+                        if (current_anc_id) {
+
+                            document.getElementById("body-" + current_anc_id).innerHTML = obj[1];
+                            $(document).ready(function(){
+                                $('#modal_anc').modal('hide');
+                            });
+                            return;
+                        }
+
+                        get_ans();
+                        $(document).ready(function(){
+                            $('#modal_anc').modal('hide');
+                        });
+                        return;
+                    }
+                    console.log(this.responseText);
+                    document.getElementById("alrtd").setAttribute("class", "alert alert-danger");
+                    document.getElementById("alrtd").innerHTML = 'Something went wrong! <span aria-hidden="true" style="float: right;cursor: pointer;" onclick="alertdclose();">&times;</span>';
+                    document.getElementById("alrtd").hidden = false;
+                };
+            }
+            var formdata = new FormData();
+
+            formdata.append("filename", file_name);
+            formdata.append("img", base64);
+            formdata.append("content", modal_content.value);
+            var url = "./php/ht_anc_editor.php?fun=save_anc";
+
+            if (current_anc_id) {
+                url = "./php/ht_anc_editor.php?fun=mod_anc&anc_id=" + current_anc_id;
+            }
+
+            xhttp.open("POST", url, true);
+            xhttp.send(formdata);
+        }
+
+        function del_set_anc(anc_id) {
+            current_anc_id = anc_id;
+        }
+        function del_anc() {
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                    if (Number(this.responseText) == 1) {
+                        document.getElementById(current_anc_id).remove();
+                    }
+
+                };
+
+            }
+
+            xhttp.open("GET", "./php/ht_anc_editor.php?fun=del_anc&anc_id=" + current_anc_id, true);
+            xhttp.send();
+
+
+        }
+    </script>
+    <!-- Page level custom scripts -->
+
+
+</body>
+
+</html>

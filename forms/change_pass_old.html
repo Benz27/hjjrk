@@ -1,0 +1,345 @@
+<?php
+session_start();
+
+include("../php/conn.php");
+include("../php/read.php");
+include("../php/user.php");
+include("../php/about.php");
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>
+        Change Password
+    </title>
+    <!-- Favicon-->
+
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+        .input-icons i {
+            position: absolute;
+        }
+
+        .input-icons {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .icon {
+            padding: 10px;
+            min-width: 40px;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column h-100 bg-image"  style="background-image: url('../img/sch4.png'); height: 100vh;
+background-repeat: no-repeat;background-size: cover;padding: 0;margin: 0;  background-attachment: fixed;">
+    <main class="flex-shrink-0">
+  
+        <nav class="navbar navbar-expand-lg navbar-light bg-success p-3 fixed-top">
+            <div class="container">
+                <a class="nav-link" href="../"
+                    style="font-family: Myriad;font-weight: bolder;color: black;font-size: 30px;">
+                    <?php echo $abt_name;?>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            </div>
+        </nav>
+        <!-- Header-->
+      <!-- style="margin-bottom: 16%;" -->
+      <header class="py-5">
+            <div class="mt-5">
+                <main>
+                    <div class="container mb-5">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-7">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header">
+                                        <h3 class="font-weight-light mt-4" id="primarylabel">Change Password</h3>
+                                        <p class="font-weight-light"><span id="secondlabel">Fill out the fields below.
+                                            </span><a href="manage_account.html">Go back.</a></p>
+                                    </div>
+                                    <div class="card-body" id="cbody">
+                                        <form id="form" method="post">
+                                            <div class="col-lg-12">
+                                                <!-- Change password card-->
+
+
+                                                <div class="" id="alrt" role="alert" hidden>
+
+                                                    <span aria-hidden="true" style="float: right;cursor: pointer;"
+                                                        onclick="alertclose();">&times;</span>
+
+
+                                                </div>
+
+                                                <!-- Form Group (current password)-->
+
+                                                <!-- Form Group (new password)-->
+                                                <div class="mb-3">
+                                                    <label class="small mb-1" for="currpass">Current Password</label>
+                                                    <input class="form-control" id="currpass" type="password"
+                                                        placeholder="Enter your current password">
+                                                    <small id="emp3" style="color: red;" hidden>This field
+                                                        cannot be empty!</small>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="small mb-1" for="pass">New Password</label>
+                                                    <input class="form-control" id="pass" type="password"
+                                                        placeholder="Enter new password">
+                                                    <small id="emp1" style="color: red;" hidden>This field
+                                                        cannot be empty!</small>
+                                                </div>
+                                                <!-- Form Group (confirm password)-->
+                                                <div class="mb-3">
+                                                    <label class="small mb-1" for="conpass">Retype
+                                                        Password</label>
+                                                    <div class="input-group">
+
+                                                        <input class="form-control" id="conpass" type="password"
+                                                            placeholder="Confirm new password" value="" required>
+
+                                                        <span class="input-group-append">
+                                                            <button class="btn ms-n4" type="button"
+                                                                onclick="toggle_pass(`tconpass`,`conpass`)">
+                                                                <i id="tconpass" class="bi-eye-fill"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                    <small id="emp2" style="color: red;" hidden>This field
+                                                        cannot be empty!</small>
+
+                                                </div>
+                                                <button class="btn btn-success" type="button" id="btnsave"
+                                                    onclick="saveinfo('.$about_id.');">Change</button>
+
+                                                <!-- Security preferences card-->
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-5 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="../images/icon.png" alt="..." /></div> -->
+
+                        </div>
+                    </div>
+                </main>
+
+            </div>
+        </header>
+        <!-- Features section-->
+        <!-- <section class="py-5" id="features">
+                <div class="container px-5 my-5">
+                    <div class="row gx-5">
+                        <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">Sign up to uframe.</h2></div>
+                        <div class="col-lg-8">
+                            <div class="row gx-5 row-cols-1 row-cols-md-2">
+                                <div class="col mb-5 h-100">
+                                    <h2 class="h5">title</h2>
+                                    <p class="mb-0">some text. some text.some text.some text.some text.some text.some text.</p>
+                                </div>
+                                <div class="col mb-5 h-100">
+                                    <h2 class="h5">title</h2>
+                                    <p class="mb-0">some text. some text.some text.some text.some text.some text.some text.</p>
+                                </div>
+                                <div class="col mb-5 mb-md-0 h-100">
+                                    <h2 class="h5">title</h2>
+                                    <p class="mb-0">some text. some text.some text.some text.some text.some text.some text.</p>
+                                </div>
+                                <div class="col h-100">
+                                    <h2 class="h5">title</h2>
+                                    <p class="mb-0">some text. some text.some text.some text.some text.some text.some text.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section> -->
+
+    </main>
+    <!-- Footer-->
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Poppins:ital,wght@0,400;0,500;0,600;1,600;1,800&display=swap');
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery-3.6.0.js"></script>
+    <!-- <script src="scripts.js"></script> -->
+    <script>
+
+        var imgbase64 = "";
+        var fnm = "";
+        var con_pass = false;
+        const ifile = document.getElementById("ifile");
+        const img = document.querySelector('#my_img');
+        const inp = document.querySelector('#pic');
+
+        var pass = document.getElementById("pass");
+        var conpass = document.getElementById("conpass");
+        var currpass = document.getElementById("currpass");
+
+        var einterc = false;
+        var pinterc = false;
+
+
+function toggle_pass(id,id2) {
+  var x = document.getElementById(id2);
+  if (x.type === "password") {
+    x.type = "text";
+    document.getElementById(id).setAttribute("class","bi-eye-slash-fill");
+  } else {
+    x.type = "password";
+    document.getElementById(id).setAttribute("class","bi-eye-fill");
+  }
+}
+
+        function alertclose() {
+            document.getElementById("alrt").hidden = true;
+
+        }
+        function saveinfo(id) {
+
+
+            pass.setAttribute("style", "border-color:rgba(210,215,223,255);");
+            conpass.setAttribute("style", "border-color:rgba(210,215,223,255);");
+            currpass.setAttribute("style", "border-color:rgba(210,215,223,255);");
+            for (x = 1; x < 4; x++) {
+                document.getElementById("emp" + x).hidden = true;
+            }
+            document.getElementById("alrt").setAttribute("class", "");
+            document.getElementById("alrt").innerHTML = "";
+            document.getElementById("alrt").hidden = true;
+            if (pass.value == "" || conpass.value == "" || currpass.value == "") {
+
+                if (pass.value == "") {
+                    pass.setAttribute("style", "border-color:red;");
+                    document.getElementById("emp1").hidden = false;
+                }
+                if (conpass.value == "") {
+                    conpass.setAttribute("style", "border-color:red;");
+                    document.getElementById("emp1").hidden = false;
+                }
+                if (currpass.value == "") {
+                    conpass.setAttribute("style", "border-color:red;");
+                    document.getElementById("emp3").hidden = false;
+                }
+            } else if (pass.value != conpass.value) {
+                document.getElementById("alrt").setAttribute("class", "alert alert-warning");
+                document.getElementById("alrt").innerHTML = 'Password did not match! <span aria-hidden="true" style="float: right;cursor: pointer;" onclick="alertclose();">&times;</span>';
+                document.getElementById("alrt").hidden = false;
+                pass.value = "";
+                conpass.value = "";
+                currpass.value = "";
+            } else {
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+
+                    if (this.readyState == 4 && this.status == 200) {
+
+                        if (Number(this.responseText) == 1) {
+                            pass.value = "";
+                            conpass.value = "";
+                            currpass.value = "";
+                            document.getElementById("alrt").setAttribute("class", "alert alert-success");
+                            document.getElementById("alrt").innerHTML = 'Password changed! <span aria-hidden="true" style="float: right;cursor: pointer;" onclick="alertclose();">&times;</span>';
+                            document.getElementById("alrt").hidden = false;
+                        } else if (Number(this.responseText) == 0) {
+                            pass.value = "";
+                            conpass.value = "";
+                            currpass.value = "";
+                            document.getElementById("alrt").setAttribute("class", "alert alert-warning");
+                            document.getElementById("alrt").innerHTML = 'The current password was wrong! <span aria-hidden="true" style="float: right;cursor: pointer;" onclick="alertclose();">&times;</span>';
+                            document.getElementById("alrt").hidden = false;
+                        }
+                        else {
+                            console.log(this.responseText);
+                            pass.value = "";
+                            conpass.value = "";
+                            currpass.value = "";
+                            document.getElementById("alrt").setAttribute("class", "alert alert-danger");
+                            document.getElementById("alrt").innerHTML = 'Something went wrong! <span aria-hidden="true" style="float: right;cursor: pointer;" onclick="alertclose();">&times;</span>';
+                            document.getElementById("alrt").hidden = false;
+                        }
+
+                    };
+
+                }
+                var formdata = new FormData();
+                formdata.append("pass", pass.value);
+                formdata.append("currpass", currpass.value);
+                xhttp.open("POST", "../php/edt_acc.php?fun=chngpass", true);
+                xhttp.send(formdata);
+            }
+
+        }
+
+
+        function checkpass() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var z = Number(this.responseText);
+
+                    if (z == 1) {
+                        ret_cpass(true);
+                        return;
+                    }
+
+                    ret_cpass(false);
+                }
+            }
+            xmlhttp.open("GET", "../php/check_pass.php?pass=" + document.getElementById("pass").value, true);
+            xmlhttp.send();
+
+        }
+        function ret_cpass(bool) {
+            con_pass = bool;
+        }
+
+        ifile.addEventListener('change', function (event) {
+
+            const uploadedFile = document.querySelector('#ifile').files[0];
+            toBase64(uploadedFile)
+                .then(res => {
+                    imgbase64 = res;
+                    inp.value = imgbase64;
+                })
+                .catch(err => {
+                    imgbase64 = err;
+                    console.log(err);
+                })
+
+        });
+
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.addEventListener('load', function () {
+
+                img.setAttribute('src', reader.result);
+                fnm = ifile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+
+            });
+
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+
+    </script>
+</body>
+
+</html>

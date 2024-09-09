@@ -1,0 +1,1030 @@
+<?php
+session_start();
+
+include("../php/conn.php");
+include("../php/read.php");
+include("../php/user.php");
+include("../php/about.php");
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Manage Account</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .no-bg {
+            background-color: transparent !important;
+        }
+    </style>
+</head>
+
+<body id="page-top bg-gradient-success bg-image" style="background-image: url('../img/sch4.png'); height: 100vh;
+background-repeat: no-repeat;background-size: cover;padding: 0;margin: 0;  background-attachment: fixed;">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #198754;">
+
+            <!-- Sidebar - Brand -->
+            <!-- <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            </a> -->
+
+            <!-- Divider -->
+            <!-- <hr class="sidebar-divider my-0"> -->
+
+            <!-- Nav Item - Dashboard -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li> -->
+
+            <!-- Divider -->
+            <!-- <hr class="sidebar-divider"> -->
+
+            <!-- Heading -->
+            <!-- <div class="sidebar-heading">
+                Interface
+            </div> -->
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Components</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
+                    </div>
+                </div>
+            </li> -->
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <!-- <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Utilities</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Utilities:</h6>
+                        <a class="collapse-item" href="utilities-color.html">Colors</a>
+                        <a class="collapse-item" href="utilities-border.html">Borders</a>
+                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                    </div>
+                </div>
+            </li> -->
+
+            <!-- Divider -->
+            <!-- <hr class="sidebar-divider"> -->
+
+            <!-- Heading -->
+            <!-- <div class="sidebar-heading">
+                Addons
+            </div> -->
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+                    aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Pages</span>
+                </a>
+                <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="login.html">Login</a>
+                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Other Pages:</h6>
+                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item active text-success" href="blank.html">Blank Page</a>
+                    </div>
+                </div>
+            </li> -->
+
+            <!-- Nav Item - Charts -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Charts</span></a>
+            </li> -->
+
+            <!-- Nav Item - Tables -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span></a>
+            </li> -->
+            <div id="sidenav"></div>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+            <?php echo $hst_notif;?>
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column no-bg">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa text-success fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <!-- <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form> -->
+
+                    <!-- Topbar Navbar -->
+                    <?php echo $admin_header_name;?>
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <!-- <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li> -->
+
+                        <!-- Nav Item - Alerts -->
+                        <!-- <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Alerts Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 12, 2019</div>
+                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 7, 2019</div>
+                                        $290.29 has been deposited into your account!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 2, 2019</div>
+                                        Spending Alert: We've noticed unusually high spending for your account.
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li> -->
+
+                        <!-- Nav Item - Messages -->
+                        <!-- <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">
+                                    Message Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                            problem I've been having.</div>
+                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                            alt="...">
+                                        <div class="status-indicator"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">I have the photos that you ordered last month, how
+                                            would you like them sent to you?</div>
+                                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-warning"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Last month's report looks great, I am very happy with
+                                            the progress so far, keep up the good work!</div>
+                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                            told me that people say this to all dogs, even if they aren't good...</div>
+                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                            </div>
+                        </li> -->
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="fullname">
+                                    <?php echo $fname;?>
+                                    <?php echo $lname;?>
+                                </span>
+                                <img class="img-profile rounded-circle" src="<?php echo $pfp;?>">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <!-- <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a> -->
+                                <!-- <div class="dropdown-divider"></div> -->
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <!-- <h1 class="h3 mb-4 text-gray-800">Blank Page</h1> -->
+                    <!-- start -->
+                    <div class="row">
+                        <!-- start row -->
+                        <div class="col-lg-12">
+
+                            <!-- Circle Buttons -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Manage Account</h6>
+                                </div>
+                                <nav class="nav justify-content-start">
+                                    <a class="nav-link active border-bottom" href="./update_info.html">User Information</a>
+                                    <a class="nav-link text-dark border-bottom" href="./update_pfp.html">Profile Picture</a>
+                                    <a class="nav-link text-dark border-bottom" href="./security.html">Security</a>
+                                </nav>
+                                <div class="card-body">
+                                    <div class="card shadow-lg border-0 rounded-lg mt-2">
+                                    
+                                        <div class="card-header">
+                                            <p class="font-weight-light"><span id="secondlabel">Update your information.
+                                                
+                                        </div>
+
+                                        <div class="card-body" id="cbody">
+                                            <form id="form" method="post">
+                                                <?php
+                                                echo '
+                                                <input type="text" name="pic" id="pic" value="" hidden> 
+                                                <input type="file" id="ifile" name="fileUpload" hidden>
+    
+                                                <div class="mb-3">
+                                                    <label class="small mb-1" for="inputEmailAddress">'.$id_type.'</label>
+                                                    <input onchange="getuserid()" class="form-control" id="user_id" type="text" value="'.$user_id.'"/>
+                                                    <small id="emp0" style="color: red;" hidden>This field cannot be empty!</small>
+                                                </div>
+    
+                                                <hr>
+                                                <!-- Form Row-->
+                                                <div class="row gx-3 mb-3">
+                                       
+                                                    <div class="col-md-4">
+                                                        <label class="small mb-1" for="fname">First name</label>
+                                                        <input class="form-control" id="fname" type="text" placeholder="Enter your first name" value="'.$fname.'" name="fname" required/>
+                                                        <small id="emp1" style="color: red;" hidden>This field cannot be empty!</small>
+                                                    </div>
+                                        
+                                                    <div class="col-md-4">
+                                                        <label class="small mb-1" for="lname">Last name</label>
+                                                        <input class="form-control" id="lname" type="text" placeholder="Enter your last name" value="'.$lname.'" name="lname" required/>
+                                                        <small id="emp2" style="color: red;" hidden>This field cannot be empty!</small>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="small mb-1" for="mname">Middle name</label>
+                                                        <input class="form-control" id="mname" type="text" placeholder="Enter your middle name" value="'.$mname.'" name="mname" required/>
+                                                        <small id="emp7" style="color: red;" hidden>This field cannot be empty!</small>
+                                                    </div>
+                                                </div>
+                                
+                                                <div class="row gx-3 mb-3">
+                                                    <!-- Form Group (phone number)-->
+                                                    <div class="col-md-6">
+                                                        <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                                                        <input class="form-control" id="email" type="email" placeholder="Enter your email address" value="'.$email.'" onchange="getuser()" name="email" required/>
+                                                        <small id="emp3" style="color: red;" hidden>This field cannot be empty!</small>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="small mb-1" for="inputPhone">Home Address (Street/Block)</label>
+                                                        <input class="form-control" id="addr" type="" placeholder="Enter your phone number" value="'.$addr.'" onchange="" name="addr" required/>
+                                                        <small id="emp8" style="color: red;" hidden>This field cannot be empty!</small>
+                                                    </div>
+                                                    <!-- Form Group (birthday)-->
+                                                   
+                                                </div>
+    
+                                                <div class="row gx-3 mb-3">
+                                                    <!-- Form Group (phone number)-->
+                                                    <div class="col-md-6">
+                                                        <label class="small mb-1" for="">City</label>
+                                                        <select name="city" id="city" class="form-control" placeholder="City">
+                                                            <option value="" selected hidden>Select your city</option>
+                                                            <option value="Angat" ';if($city == 'Angat'){echo "selected";} echo '>Angat</option>
+                                                            <option value="Baliuag" ';if($city == 'Baliuag'){echo "selected";} echo '>Baliuag</option>
+                                                            <option value="Balagtas" ';if($city == 'Balagtas'){echo "selected";} echo '>Balagtas</option>
+                                                            <option value="Bocaue" ';if($city == 'Bocaue'){echo "selected";} echo '>Bocaue</option>
+                                                            <option value="Bustos" ';if($city == 'Bustos'){echo "selected";} echo '>Bustos</option>
+                                                            <option value="Dona Remedios Trinidad" ';if($city == 'Dona Remedios Trinidad'){echo "selected";} echo '>Dona Remedios Trinidad</option>
+                                                            <option value="Marilao" ';if($city == 'Marilao'){echo "selected";} echo '>Marilao</option>
+                                                            <option value="Malolos City" ';if($city == 'Malolos City'){echo "selected";} echo '>Malolos City</option>
+                                                            <option value="Meycauayan City" ';if($city == 'Meycauayan'){echo "selected";} echo '>Meycauayan City</option>
+                                                            <option value="Norzagaray" ';if($city == 'Norzagaray'){echo "selected";} echo '>Norzagaray</option>
+                                                            <option value="Obando" ';if($city == 'Obando'){echo "selected";} echo '>Obando</option>
+                                                            <option value="Pulilan" ';if($city == 'Pulilan'){echo "selected";} echo '>Pulilan</option>
+                                                            <option value="San Jose del Monte City" ';if($city == 'San Jose del Monte City'){echo "selected";} echo '>San Jose del Monte City</option>
+                                                            <option value="San Rafael" ';if($city == 'San Rafael'){echo "selected";} echo '>San Rafael</option>
+                                                            <option value="San Miguel" ';if($city == 'San Miguel'){echo "selected";} echo '>San Miguel</option>
+                                                            <option value="Sta. Maria" ';if($city == 'Sta. Maria'){echo "selected";} echo '>Sta. Maria</option>
+                                                          </select>
+                                                        <small id="emp9" style="color: red;" hidden>Please choose from the field!</small>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="small mb-1" for="">Province</label>
+                                                        <input class="form-control" id="prov" type="text" placeholder="Enter your province" value="'.$prov.'" onchange="" name="prov" required readonly/>
+                                                        <small id="emp10" style="color: red;" hidden>This field cannot be empty!</small>
+                                                    </div>
+                                                    <!-- Form Group (birthday)-->
+                                                   
+                                                </div>
+
+
+                                                <!-- <div class="mb-3">
+    
+                                                </div> -->
+                                                <!-- Form Row-->
+                                                <div class="row gx-3 mb-3">
+                                                    <!-- Form Group (phone number)-->
+                                                    <div class="col-md-6">
+                                                        <label class="small mb-1" for="inputPhone">Phone number</label>
+                                                        <input class="form-control" id="contno" type="tel" placeholder="Enter your phone number" value="'.$contno.'" onchange="getphone()" name="contno" required/>
+                                                        <small id="emp4" style="color: red;" hidden>This field cannot be empty!</small>
+                                                    </div>
+                                                    <!-- Form Group (birthday)-->
+                                                    <div class="col-md-6">
+                                                        <label class="small mb-1" for="inputBirthday">Birthday</label>
+                                                        <input class="form-control" id="dte" type="date" placeholder="Enter your birthday" value="'.$bday.'" name="dte" required/>
+                                                        <small id="emp5" style="color: red;" hidden>This field cannot be empty!</small>
+                                                    </div>
+                                                </div>
+    
+                                                <!-- <div class="mb-3">
+                                                    <label class="small mb-1" for="inputPassword">Password</label>
+                                                    <input class="form-control" id="pass" type="password" placeholder="Enter your password to continue changes" value="" name="pass" required/>
+                                                    <small id="emp6" style="color: red;" hidden>This field cannot be empty!</small>
+                                                </div> -->
+                                                <div class="input-group" hidden>
+                                                    <input class="form-control" id="pass" type="password" name="pass" placeholder="Enter your password to continue changes" value="" required>
+                                        
+                                                    <span class="input-group-append">
+                                                        <button class="btn ms-n4" type="button" onclick="toggle_pass(`tpass`,`pass`)">
+                                                            <i id="tpass" class="bi-eye-fill"></i>
+                                                        </button>
+                                                    </span>
+                                             </div>
+                                             <small id="emp6" style="color: red;" hidden>This field cannot be empty!</small>
+    
+    
+                                                <div class="alert alert-success text-center" role="alert" hidden id="alrtd">
+                                                   
+                                                </div>
+                                                <button class="btn btn-success mt-3" type="button" onclick="save('.$user_id.');">Update</button>';?>
+    
+                                                <!-- <a class="btn btn-secondary mt-3" href="manage_account.html" type="button">Back</a> -->
+    
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <!-- end row -->
+                    </div>
+
+                    <!-- end -->
+                </div>
+                <!-- /.container-fluid -->
+              
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+           
+            <!-- End of Footer -->
+            <?php echo $abt_admin_footer;?>
+        </div>
+       
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="../php/logout.php">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../js/sb-admin-2.min.js"></script>
+    <script src="./js/sidenav_form.js"></script>
+    <script>
+
+       document.getElementById("sidenav").innerHTML = navs_adm("Manage Account");
+
+
+    
+
+        var imgbase64 = "";
+        var fnm = "";
+        var con_pass = false;
+        const elements = [
+            "user_id",
+            "fname",
+            "lname",
+            "mname",
+            "addr",
+            "email",
+            "contno",
+            "dte",
+            "pass",
+            "city",
+            "prov"];
+        const emps_str = ["emp0","emp1", "emp2", "emp7", "emp8", "emp3", "emp4", "emp5", "emp6","emp9","emp10"];
+        const emps = [];
+        const obj_elements = [];
+        const elm_cnt = elements.length;
+        const emp_cnt = emps_str.length;
+
+        for (ob = 0; ob < elements.length; ob++) {
+            obj_elements.push(document.getElementById(elements[ob]));
+            emps.push(document.getElementById(emps_str[ob]));
+        }
+
+        const ifile = document.getElementById("ifile");
+        const img = document.querySelector('#my_img');
+        const inp = document.querySelector('#pic');
+
+        var e = document.getElementById("email");
+        var cn = document.getElementById("contno");
+
+        var dte = document.getElementById("dte");
+        var pass = document.getElementById("pass");
+
+        var einterc = false;
+        var pinterc = false;
+        var iinterc = false
+
+        function toggle_pass(id, id2) {
+            var x = document.getElementById(id2);
+            if (x.type === "password") {
+                x.type = "text";
+                document.getElementById(id).setAttribute("class", "bi-eye-slash-fill");
+            } else {
+                x.type = "password";
+                document.getElementById(id).setAttribute("class", "bi-eye-fill");
+            }
+        }
+        function clear_mod(elm_arr, act) {
+            var indexes = [];
+            var arr_base = [];
+            var itr = 0;
+            if (elm_arr != null) {
+                for (x = 0; x < elm_arr.length; x++) {
+                    if (isNaN(elm_arr[x])) {
+                        indexes.push(Number(elements.indexOf(elm_arr[x])));
+                    } else {
+                        indexes.push(Number(elm_arr[x]));
+                    }
+                }
+            } else {
+                clear_all();
+                return;
+            }
+
+            if (act) {
+                itr = indexes.length;
+                arr_base = indexes;
+            } else {
+                itr = elm_cnt;
+                for (x = 0; x < itr; x++) {
+                    if (x != indexes[x]) {
+                        arr_base.push(x);
+                    }
+                }
+            }
+
+
+            for (x = 0; x < itr; x++) {
+                obj_elements[arr_base[x]].setAttribute("style", "border-color:rgba(210,215,223,255);");
+                // obj_elements[arr_base[x]].value="";
+                emps[arr_base[x]].hidden = true;
+            }
+
+        }
+
+
+
+        function clear_all() {
+
+            for (x = 0; x < elm_cnt; x++) {
+                obj_elements[x].setAttribute("style", "border-color:rgba(210,215,223,255);");
+                // obj_elements[x].value="";
+                emps[x].hidden = true;
+            }
+        }
+
+
+
+        function alertdclose() {
+            document.getElementById("alrtd").hidden = true;
+        }
+       
+        
+        function phoneValidate(obj_name){
+            const ind=Number(elements.indexOf(obj_name));
+            var phone=obj_elements[ind].value;
+            var regex=/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{11,11}$/;
+            var validate=phone.match(regex);
+            console.log(validate);
+            if(validate===null){
+                obj_elements[ind].setAttribute("style", "border-color:red;");
+                emps[ind].innerHTML = "Invalid format!";
+                emps[ind].hidden = false;
+                return true;
+            }
+            obj_elements[ind].setAttribute("style", "border-color:rgba(210,215,223,255);");
+            emps[ind].hidden = true;
+            return false;
+        }
+        function set_err(elm_arr, act) {
+            var bool = false;
+            var indexes = [];
+            var arr_base = [];
+            var itr = 0;
+
+            if (elm_arr != null) {
+                for (x = 0; x < elm_arr.length; x++) {
+                    if (isNaN(elm_arr[x])) {
+                        indexes.push(Number(elements.indexOf(elm_arr[x])));
+                    } else {
+                        indexes.push(Number(elm_arr[x]));
+                    }
+                }
+            }
+
+            if (act) {
+                itr = indexes.length;
+                arr_base = indexes;
+            } else {
+                itr = elm_cnt;
+                for (x = 0; x < itr; x++) {
+                    if (x != indexes[x]) {
+                        arr_base.push(x);
+                    }
+                }
+            }
+
+
+            for (x = 0; x < itr; x++) {
+                if (obj_elements[arr_base[x]].value == "") {
+                    obj_elements[arr_base[x]].setAttribute("style", "border-color:red;");
+                    emps[arr_base[x]].hidden = false;
+                    bool = true;
+                }
+            }
+            return bool;
+
+        }
+
+
+        function save(id) {
+            if (!einterc && !pinterc && !iinterc) {
+
+
+                clear_mod();
+                alertdclose();
+
+                if (set_err(["user_id","fname", "lname", "email", "contno", "dte", "addr", "city", "prov"], true)) {
+                    return;
+                }
+
+                if(phoneValidate("contno")){
+                    return;
+                }
+
+                submit();
+                //var xmlhttp = new XMLHttpRequest();
+                // xmlhttp.onreadystatechange = function () {
+                //     if (this.readyState == 4 && this.status == 200) {
+                //         var z = Number(this.responseText);
+                //         if (z == 1) {
+                            
+                //         } else {
+                //             document.getElementById("alrtd").setAttribute("class", "alert alert-warning");
+                //             document.getElementById("alrtd").innerHTML = 'Wrong password! <span aria-hidden="true" style="float: right;cursor: pointer;" onclick="alertdclose();">&times;</span>';
+                //             document.getElementById("alrtd").hidden = false;
+                //             document.getElementById("pass").value = "";
+                //         }
+                //     }
+                // }
+                // xmlhttp.open("GET", "../php/check_pass.php?pass=" + document.getElementById("pass").value, true);
+                // xmlhttp.send();
+            }
+        }
+
+        function submit() {
+
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+
+                if (this.readyState == 4 && this.status == 200) {
+
+                    clear_mod();
+                    document.getElementById("pass").value = "";
+                    const obj=JSON.parse(this.responseText);
+                    if (Number(obj[0]) == 1) {
+                        document.getElementById("alrtd").setAttribute("class", "alert alert-success");
+                        document.getElementById("alrtd").innerHTML = 'Update success! <span aria-hidden="true" style="float: right;cursor: pointer;" onclick="alertdclose();">&times;</span>';
+                        document.getElementById("alrtd").hidden = false;
+                        document.getElementById("fullname").innerHTML = obj[1]+" "+obj[2];
+                        return;
+                    }
+                    console.log(this.responseText);
+                    document.getElementById("alrtd").setAttribute("class", "alert alert-danger");
+                    document.getElementById("alrtd").innerHTML = 'Something went wrong! <span aria-hidden="true" style="float: right;cursor: pointer;" onclick="alertdclose();">&times;</span>';
+                    document.getElementById("alrtd").hidden = false;
+                };
+
+            }
+            var formdata = new FormData();
+            const columns = ["user_id","fname", "lname", "mname", "address", "email", "phone", "bday","city","province"];
+            const types = ["int","string", "string", "string", "string", "string", "string", "date", "string", "string"];
+            const values = [obj_elements[0].value,
+            obj_elements[1].value,
+            obj_elements[2].value,
+            obj_elements[3].value,
+            obj_elements[4].value,
+            obj_elements[5].value,
+            obj_elements[6].value,
+            obj_elements[7].value,
+            obj_elements[9].value,
+            obj_elements[10].value];
+            const tables = ["user", "info"];
+
+            formdata.append("columns", JSON.stringify(columns));
+            formdata.append("types", JSON.stringify(types));
+            formdata.append("values", JSON.stringify(values));
+            formdata.append("tables", JSON.stringify(tables));
+
+
+
+            xhttp.open("POST", "../php/edt_acc.php?fun=updt", true);
+            xhttp.send(formdata);
+        }
+
+
+        function getuser() {
+            var str = e.value;
+            var que = "email";
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var z = this.responseText;
+
+                    var x;
+                    var y = 0;
+                    y = Number(z);
+                    console.log(y);
+                    if (y == 1) {
+                        einterc = true;
+                    } else if (y == 0) {
+                        einterc = false;
+                    }
+
+
+                    if (y == 1) {
+                        x = e.value;
+                        e.style.border = "2px solid red";
+                        document.getElementById("emp3").hidden = false;
+                        document.getElementById("emp3").innerHTML = "Email was already taken!";
+                        // document.getElementById("alertp").innerHTML="Email was already taken!";
+                        // document.getElementById("alertp").hidden=false;
+                    } else {
+                        x = e.value;
+                        e.style.border = "1px solid #ced4da";
+                        document.getElementById("emp3").hidden = true;
+                        document.getElementById("emp3").innerHTML = "This field cannot be empty!";
+                        // document.getElementById("alertp").hidden=true;
+                        // document.getElementById("alertp").innerHTML="";
+                    }
+
+                }
+            }
+
+            xmlhttp.open("GET", "../php/checkuser.php?table=user&q=" + str + "&qu=" + que, true);
+            xmlhttp.send();
+        }
+
+        function getphone() {
+            var str = cn.value;
+            var que = "phone";
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    var z = this.responseText;
+                    var x;
+                    var y = 0;
+                    y = Number(z);
+
+                    if (y == 1) {
+                        pinterc = true;
+                    } else if (y == 0) {
+                        pinterc = false;
+                    }
+
+
+                    if (y == 1) {
+                        x = cn.value;
+                        cn.style.border = "2px solid red";
+                        document.getElementById("emp4").hidden = false;
+                        document.getElementById("emp4").innerHTML = "Phone was already taken!";
+                        // document.getElementById("alertp2").innerHTML="Phone was already taken!";
+                        // document.getElementById("alertp2").hidden=false;
+
+                    } else {
+                        x = cn.value;
+                        cn.style.border = "1px solid #ced4da";
+                        document.getElementById("emp4").hidden = true;
+                        document.getElementById("emp4").innerHTML = "This field cannot be empty!";
+                        // document.getElementById("alertp2").hidden=true;
+                        // document.getElementById("alertp2").innerHTML="";
+                    }
+
+
+                }
+            }
+
+            xmlhttp.open("GET", "../php/checkuser.php?table=info&q=" + str + "&qu=" + que, true);
+            xmlhttp.send();
+        }
+
+
+
+        function getuserid() {
+            user_id_inp=document.getElementById("user_id");
+            var str = user_id_inp.value;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var z = this.responseText;
+                    var x;
+                    var y = false;
+                    y = Boolean(z);
+                    console.log(y);
+                    if (y) {
+                        iinterc = true;
+                    } else {
+                        iinterc = false;
+                    }
+                    if (y) {
+                        user_id_inp.style.border = "2px solid red";
+                        document.getElementById("emp0").hidden = false;
+                        document.getElementById("emp0").innerHTML = "This ID was already registered!";
+                    } else {
+                        user_id_inp.style.border = "1px solid #ced4da";
+                        document.getElementById("emp0").hidden = true;
+                        document.getElementById("emp0").innerHTML = "This field cannot be empty!";
+                    }
+                }
+            }
+        
+            xmlhttp.open("GET", "../php/check_id.php?id=" + str, true);
+            xmlhttp.send();
+        }
+
+
+
+        function checkpass() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var z = Number(this.responseText);
+
+                    if (z == 1) {
+                        ret_cpass(true);
+                        return;
+                    }
+
+                    ret_cpass(false);
+                }
+            }
+            xmlhttp.open("GET", "../php/check_pass.php?pass=" + document.getElementById("pass").value, true);
+            xmlhttp.send();
+
+        }
+        function ret_cpass(bool) {
+            con_pass = bool;
+        }
+
+        ifile.addEventListener('change', function (event) {
+
+            const uploadedFile = document.querySelector('#ifile').files[0];
+            toBase64(uploadedFile)
+                .then(res => {
+                    imgbase64 = res;
+                    inp.value = imgbase64;
+                })
+                .catch(err => {
+                    imgbase64 = err;
+                    console.log(err);
+                })
+
+        });
+
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.addEventListener('load', function () {
+
+                img.setAttribute('src', reader.result);
+                fnm = ifile.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+
+            });
+
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+
+    </script>
+</body>
+
+</html>
